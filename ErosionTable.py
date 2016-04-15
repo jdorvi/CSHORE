@@ -2,9 +2,9 @@
 """
 Description:
 
-Input(s):
+Input(s): WAVEPATH
 
-Output(s):
+Output(s): Transect & Station files
 
 slawler@dewberry.com
 
@@ -14,7 +14,6 @@ import os
 import pandas as pd
 
 #----Assign Directories ==> Copy from CoastalErosion.py 
-SRCPATH =  "P:/02/NY/Monroe_36055C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/PGDB_S/Monroe_NY_PGDB.mdb"
 WAVEPATH = "P:/02/NY/Monroe_36055C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/STARTING_WAVE_CONDITIONS_S"
 
 #----Short hand formatting variables
