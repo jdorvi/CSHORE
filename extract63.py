@@ -18,7 +18,7 @@ nnodes = 165290
 #----nodes of interest
 node_list = [60643, 63290]
 
-#---number of recordings minus one
+#---number of recordings 
 tsteps = 289
 
 #directories to loop through if desired (one only should work fine)
