@@ -15,13 +15,16 @@ def main():
   PARENT_DIRECTORY     = "P:/02/NY/Monroe_36055C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/CSHORE_J/Hydrographs/input/"
   getstationoutput_exe = "C:/Users/jdorvinen/Desktop/cshore/getstationoutput9.exe"
   stationfile          = "C:/Users/jdorvinen/Desktop/cshore/stationfile.txt"
-  stormlist            = ["C:/Users/jdorvinen/Desktop/cshore/stormslist1.txt",
-                          "C:/Users/jdorvinen/Desktop/cshore/stormslist2.txt",
-                          "C:/Users/jdorvinen/Desktop/cshore/stormslist3.txt",
-                          "C:/Users/jdorvinen/Desktop/cshore/stormslist4.txt",
-                          "C:/Users/jdorvinen/Desktop/cshore/stormslist5.txt"] ##getstationoutput_scripted.py eliminates the need for this.
+  stormfile            = "C:/Users/jdorvinen/Desktop/cshore/stormslist"
   datafiles_directory  = "P:/02/LakeOntario/Storm/"
   output_directory     = "P:/02/NY/Monroe_36055C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/CSHORE_J/Hydrographs/ouput"
+  
+  stormlist = []
+  for i in range(1,6):
+      storm = stormfile + '{}.txt'.format(str(i))
+      stormlist.append(storm) ##getstationoutput_scripted.py eliminates the need for this. ##getstationoutput_scripted.py eliminates the need for this.
+  
+  
   #call subprocess
   def crude_parrallelization(stormlist):
     df = pd.read_csv(stormlist,header=False,names=['storm'])
