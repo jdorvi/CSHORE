@@ -26,10 +26,10 @@ import timeit
 from time import sleep
 
 # ~\CSHORE_Infile_Creater\output
-ROOTDIR = r'P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\CSHORE\CSHORE_Infile_Creater\output_test\TR1'
+ROOTDIR = r'P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\CSHORE\CSHORE_Infile_Creater\output'
 
 # CSHORE executable source directory
-CSHOREDIR = r'\\wolftrap\MCS\FederalPrograms\Dept62\Coastal Group\CSHORE\cshore_usace_nosource-2015-05-06-10-57\convert_to_exe'
+CSHOREDIR = r'P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\CSHORE\CSHORE_Infile_Creater\output'
 
 # CSHORE executable full path
 CSHORE_EXE = os.path.join(CSHOREDIR, "CSHORE_Runup.exe")
@@ -78,7 +78,7 @@ def main():
     # Start script timer
     tic()
     # Open logfile, set write mode to append
-    with open(os.path.join(CSHOREDIR, 'InfileChecker.log'), 'a') as logfile:
+    with open(os.path.join(ROOTDIR, 'InfileChecker.log'), 'a') as logfile:
         # Walk directory structure
         for root, dirs, files in os.walk(ROOTDIR):
             # If only one file exists in the directory, assume it's a CSHORE input file and

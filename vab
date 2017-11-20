@@ -1,0 +1,19 @@
+INTRODUCTION:
+This excel file contains a macro (called GenerateRunupReductionFiles) that automates the reduction of runup values and creates new input files at the user specified location. The macro requires 3 inputs: 
+1) Path to the comma-delimited file containing transect-reduction factors 
+2) Path to the folder containing raw (source) input files 
+3) Path to the folder where the macro should output the new runup files. See Niagara county example for input setup. 
+
+Sample Input (Niagara County, NY):
+1)Runup Reduction file Path -  P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\WAVE_RUNUP\Chautauqua_NY_Roughness.txt
+
+2)Folder containing Raw Runup files - P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\CSHORE\STATS_2perRunup\output\before_applying_Roughness_coefficient
+
+3)Output folder path - P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\CSHORE\STATS_2perRunup\output
+PROCEDURE: 
+Following are the steps to run the macro:
+1) Open "Visual Basic" editor under "Developer" tab.
+2) Update the 3 input paths. See the code lines commented with "CHANGE"
+3) Open "Intermediate Window" under "View" tab, to see the progress summary
+4) To run the macro, click on "Run Macro" item under "Run" menu.
+5) Once the macro is run check the output files and make sure that the results look fine by spot checking a few numbers.

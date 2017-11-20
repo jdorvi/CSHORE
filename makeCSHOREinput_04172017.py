@@ -52,17 +52,17 @@ import numpy as np
 #from cshore_transects import TRANSECTS
 
 inpth1='//surly.mcs.local/flood/02/NY/Chautauqua_Co_36013C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/CSHORE/CSHORE_Infile_Creater/input'
-inpth2='//surly.mcs.local/flood/02/NY/Chautauqua_Co_36013C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/CSHORE/Hydrograph_stretching/output_fixing'
+inpth2='//surly.mcs.local/flood/02/NY/Chautauqua_Co_36013C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/CSHORE/Hydrograph_stretching/output'
 outpth='//surly.mcs.local/flood/02/NY/Chautauqua_Co_36013C/STUDY__TO90/TECHNICAL/ENG_FLOOD_HAZ_DEV/COASTAL/WAVE_MODELING/CSHORE/CSHORE_Infile_Creater/output_test'
-transect_id = int('35') #35, 38
-d50 = float('0.7')
+#transect_id = int('35') #35, 38
+#d50 = float('0.7')
 fb = float('0.015') # Default CSHORE value is 0.002, got recommendation for 0.015 from USACE
-erod = int('0')
+#erod = int('0')
 dconv = float('174') # Lake Erie: 174, Lake Ontario: 74.2
 
 # CSHORE execution and physical params
 ILINE = 1        # 1 = single line
-IPROFL = erod    # 0 = no morph, 1 = run morph
+#IPROFL = erod    # 0 = no morph, 1 = run morph
 ISEDAV = 0       # 0 = unlimited sand, 1 = hard bottom
 IPERM = 0        # 0 = no permeability, 1 = permeable
 IOVER = 1        # 0 = no overtopping , 1 = include overtopping
@@ -77,7 +77,7 @@ ITIDE = 0        # 0 = no tidal effect on currents
 DX = 0.5         # constant dx
 GAMMA = 0.5      # shallow water ratio of wave height to water depth
 #SPORO = 0        # sediment porosity
-D50 = d50        # d_50 in mm
+#D50 = d50        # d_50 in mm
 SG = 2.65        # specific gravity of sediment
 EFFB = 0.005     # suspension efficiency due to breaking eB
 EFFF = 0.01      # suspension efficiency due to friction ef
@@ -265,7 +265,7 @@ def makeCSHOREinput(inpth1, inpth2, outpth, transect_id, erod, d50, dconv=0):
 
                 # assign standard heading
                 s01 = '{0:<42}->ILINE\n'.format(ILINE)
-                s02 = '{0:<42}->IPROFL\n'.format(IPROFL) # Movable bottom
+                s02 = '{0:<42}->IPROFL\n'.format(erod) # Movable bottom
                 s03 = '{0:<42}->ISEDAV\n'.format(ISEDAV) # unlimited sediment availability, if IPROFL = 1, ISEDAV must be specified.
                 s04 = '{0:<42}->IPERM \n'.format(IPERM)   # Impermeable bottom
                 s05 = '{0:<42}->IOVER\n'.format(IOVER)   # wave overtopping allowed
@@ -278,7 +278,7 @@ def makeCSHOREinput(inpth1, inpth2, outpth, transect_id, erod, d50, dconv=0):
                 s12 = '{0:<42}->ITIDE\n'.format(ITIDE)
                 s13 = '{0}{1:<37.3f}->DX\n'.format(' '*5, DX)  # Constant nodal spacing
                 s14 = '{0}{1:<37.4f}->GAMMA\n'.format(' '*5, GAMMA)  # empirical breaker ration.
-                s15 = '{0}{1:.1f}{0}{2:.6f}{0}{3:.4f}{4}->D50 WF SG\n'.format(' '*5, D50, wf, SG, ' '*9) # mean sediment diameter, sediment fall velocity, sediment specific gravity.
+                s15 = '{0}{1:.1f}{0}{2:.6f}{0}{3:.4f}{4}->D50 WF SG\n'.format(' '*5, d50, wf, SG, ' '*9) # mean sediment diameter, sediment fall velocity, sediment specific gravity.
                 s16 = '{0}{1:.4f}{0}{2:.4f}{0}{3:.4f}{0}{4:.4f}{5}->EFFB EFFF SLP\n'.format(' '*5, EFFB, EFFF, SLP, 0.1, ' '*14) #suspension efficiency due to wave breaking, suspension efficiency due to btm friction, suspension load parameter
                 s17 = '{0}{1:.4f}{0}{2:.4f}{3}->TANPHI BLP\n'.format(' '*5, TANPHI, BLP, ' '*20) # sediment limiting (maximum) slope, bedload parameter. needed if IPROFL = 1.
                 s18 = '{0}{1:.3f}{2}->RWH \n'.format(' '*5, RWH, ' '*32) # runup wire height
@@ -328,7 +328,11 @@ def makeCSHOREinput(inpth1, inpth2, outpth, transect_id, erod, d50, dconv=0):
 
 def main(argv):
     """ main function """
-    makeCSHOREinput(inpth1, inpth2, outpth, transect_id, erod, d50, dconv)
+    from cshore_transects import TRANSECTS
+    for transect_id in TRANSECTS:
+        d50 = TRANSECTS[transect_id]['d50']
+        erod = TRANSECTS[transect_id]['erod']
+        makeCSHOREinput(inpth1, inpth2, outpth, transect_id, erod, d50, dconv)
 
 if __name__ == '__main__':
     main(sys.argv[1:])

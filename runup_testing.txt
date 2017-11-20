@@ -1,0 +1,3 @@
+P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\WAVE_RUNUP\Chautauqua_NY_Roughness.txt #Runup reduction file
+P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\CSHORE\STATS_2perRunup\output\before_applying_Roughness_coefficient #directory of STATS_2perRunup output files
+P:\02\NY\Chautauqua_Co_36013C\STUDY__TO90\TECHNICAL\ENG_FLOOD_HAZ_DEV\COASTAL\WAVE_MODELING\CSHORE\STATS_2perRunup\output\testing #Output directory

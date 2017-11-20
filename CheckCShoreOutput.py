@@ -38,9 +38,36 @@ OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 updated syntax to be compatible with Python 3.x - JD
 
 """
-
+# Import modules
 import sys
 import os
+
+# Define functions
+def is_number(string):
+    """ Check if a string is a valid number.
+    input:
+    string - string characters being checked
+    output:
+    returns True or False
+    ref:
+    http://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-in-python
+    """
+    try:
+        # Convert original string to a float and then back to a string
+        number = str(float(string))
+        # Check if the number is 'nan' or a non-real number
+        if number == "nan" or number == "inf" or number == "-inf":
+            # if 'string' is not a real number, then it's not a number
+            return False
+    except ValueError:
+        # if could not convert original string to a number, check it it is a complex number
+        try:
+            complex(string) # for complex
+        except ValueError:
+            # If can't confirm that 'string' is a complex number, then it's not a number
+            return False
+    # If 'string' is not a non-real number and/or is a complex number, then it's a number
+    return True
 
 def CheckCShoreOutput(inputfolderpath):
     """ CheckCShoreOutput(inputfolderpath)
@@ -87,37 +114,19 @@ def CheckCShoreOutput(inputfolderpath):
                             logfile.write(errormessage)
                             # and print it in the terminal
                             print(errormessage)
+        # Check if any errors have been found,
+        try:
+            if errormessage in locals():
+                pass
+        except UnboundLocalError:
+            # if not, print 'All's good' to errorlog
+            message = 'No errors found in CSHORE output files contained in directory\n{}'
+            logfile.write(message.format(inputfolderpath))
+            # and print it in the terminal
+            print(message.format(inputfolderpath))
     # Once all files are checked, print out "completed..."
     print("completed...")
 
-
-def is_number(string):
-    """ Check if a string is a valid number.
-    input:
-    string - string characters being checked
-    output:
-    returns True or False
-    ref:
-    http://stackoverflow.com/questions/354038/how-do-i-check-if-a-string-is-a-number-in-python
-    """
-    try:
-        # Convert original string to a float and then back to a string
-        number = str(float(string))
-        # Check if the number is 'nan' or a non-real number
-        if number == "nan" or number == "inf" or number == "-inf":
-            # if 'string' is not a real number, then it's not a number
-            return False
-    except ValueError:
-        # if could not convert original string to a number, check it it is a complex number
-        try:
-            complex(string) # for complex
-        except ValueError:
-            # If can't confirm that 'string' is a complex number, then it's not a number
-            return False
-    # If 'string' is not a non-real number and/or is a complex number, then it's a number
-    return True
-
-
 if __name__ == '__main__':
-    INPUTFOLDERPATH = sys.argv[0]
+    INPUTFOLDERPATH = sys.argv[1]
     CheckCShoreOutput(INPUTFOLDERPATH)
